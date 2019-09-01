@@ -7,6 +7,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.CapabilityType;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.Assert;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
@@ -14,6 +16,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.concurrent.TimeUnit;
 
 public class TestClass1 {
@@ -23,14 +26,18 @@ public class TestClass1 {
 
     @BeforeMethod
     public void launchApplication() throws MalformedURLException {
+        // DesiredCapabilities capabilities = null;
+        //capabilities= DesiredCapabilities.chrome();
+
         System.setProperty("webdriver.chrome.driver", "C:\\Users\\Nirbhay\\Desktop\\chromedriver.exe");
         ChromeOptions options = new ChromeOptions();
-        options.setCapability(CapabilityType.PLATFORM_NAME, Platform.WINDOWS);
+        options.setCapability(CapabilityType.BROWSER_NAME,"chrome");
+        options.setCapability(CapabilityType.PLATFORM_NAME, Platform.WIN10);
         options.setCapability(CapabilityType.UNEXPECTED_ALERT_BEHAVIOUR, UnexpectedAlertBehaviour.ACCEPT);
         options.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
         options.addArguments("start-maximized");
 
-        driver = new ChromeDriver(options);
+        driver = new RemoteWebDriver(new URL("http://192.168.1.9:4444/wd/hub"),options);
         driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
     }
 
