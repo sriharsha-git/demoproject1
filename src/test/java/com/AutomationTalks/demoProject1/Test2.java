@@ -18,7 +18,7 @@ public class Test2 {
         // System.out.println(driver.getTitle());
 
 
-        System.setProperty("webdriver.gecko.driver", "P:\\2. Selenium Data\\Drivers\\geckodriver.exe");
+        //System.setProperty("webdriver.gecko.driver", "P:\\2. Selenium Data\\Drivers\\geckodriver.exe");
 
         DesiredCapabilities firefoxProfile = new DesiredCapabilities();
         firefoxProfile.setCapability("browser.private.browsing.autostart", true);
