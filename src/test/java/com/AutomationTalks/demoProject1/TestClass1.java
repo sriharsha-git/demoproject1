@@ -23,21 +23,30 @@ public class TestClass1 {
 
 
     public static WebDriver driver;
+    public static final String USERNAME = "sriharshaavanchi1";
+    public static final String AUTOMATE_KEY = "JipsqDdp7kFGpSu27TgD";
+    public static final String URL = "https://" + USERNAME + ":" + AUTOMATE_KEY + "@hub-cloud.browserstack.com/wd/hub";
 
     @BeforeMethod
     public void launchApplication() throws MalformedURLException {
-        // DesiredCapabilities capabilities = null;
-        //capabilities= DesiredCapabilities.chrome();
-
-        System.setProperty("webdriver.chrome.driver", "C:\\Users\\Nirbhay\\Desktop\\chromedriver.exe");
+        //System.setProperty("webdriver.chrome.driver", "C:\\Users\\Nirbhay\\Desktop\\chromedriver.exe");
         ChromeOptions options = new ChromeOptions();
-        options.setCapability(CapabilityType.BROWSER_NAME,"chrome");
-        options.setCapability(CapabilityType.PLATFORM_NAME, Platform.WIN10);
         options.setCapability(CapabilityType.UNEXPECTED_ALERT_BEHAVIOUR, UnexpectedAlertBehaviour.ACCEPT);
         options.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
         options.addArguments("start-maximized");
-
-        driver = new RemoteWebDriver(new URL("http://192.168.1.9:4444/wd/hub"),options);
+        //options.setCapability(CapabilityType.BROWSER_NAME,"chrome");
+        //options.setCapability(CapabilityType.PLATFORM_NAME, Platform.WIN10);
+        DesiredCapabilities caps = new DesiredCapabilities();
+        caps.setCapability("browser", "Chrome");
+        caps.setCapability("browser_version", "62.0");
+        caps.setCapability("os", "Windows");
+        caps.setCapability("os_version", "10");
+        caps.setCapability("resolution", "1024x768");
+        caps.setCapability("project", "Demo Automation Project");
+        caps.setCapability("build", "Build #1");
+        caps.setCapability("name", "Demo Suite");
+        caps.setCapability(ChromeOptions.CAPABILITY, options);
+        driver = new RemoteWebDriver(new URL(URL), options);
         driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
     }
 
